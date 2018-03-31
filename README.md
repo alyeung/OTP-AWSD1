@@ -8,3 +8,13 @@ sudo pip-3.6 install -r exercise-s3-upload/FlaskApp/requirements.txt
 PHOTOS_BUCKET
 FLASK_SECRET 
 :dog:
+
+## Command line MySQL Tips
+https://gist.github.com/hofmannsven/9164408
+
+show databases;
+show tables;
+use Photos;
+describe photo;
+select * from photo;
+
