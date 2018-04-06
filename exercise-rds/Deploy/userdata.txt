@@ -1,5 +1,5 @@
 #!/bin/bash -ex
-bucket=BUCKET_NAME
+bucket=s3artifactbucket8
 
 # install python3.6 and dev tools
 yum -y install python36
