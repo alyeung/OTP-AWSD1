@@ -12,6 +12,10 @@
 import sys
 from datetime import datetime
 
+# added for Polly
+import io
+from flask import Flask, render_template_string, session, redirect, request, url_for, send_file
+
 import requests
 from requests.auth import HTTPBasicAuth
 import boto3
@@ -219,6 +223,23 @@ def info():
                                   instance_id=instance_id,
                                   availability_zone=availability_zone,
                                   sys_version=sys.version)
+                                  
+@application.route("/members_voice")
+@flask_login.login_required
+def members_voice():
+    """A polly synthesized voice"""
+    polly = boto3.client("polly")
+    message = "hello %s welcome back" % flask_login.current_user.nickname
+    
+    # https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
+    response = polly.synthesize_speech(VoiceId='Russell', Text=message, OutputFormat='mp3', SampleRate='8000')
+
+    polly_bytes = response['AudioStream'].read()
+    return send_file(
+        io.BytesIO(polly_bytes),
+        mimetype='audio/mpeg',
+        cache_timeout=-1
+    )
 
 @application.route("/login")
 def login():
