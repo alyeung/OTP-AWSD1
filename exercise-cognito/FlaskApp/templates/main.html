@@ -38,7 +38,17 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               {% if current_user.is_authenticated %}
+              
+              <!-- add audio player
               <li><p class="navbar-text">Hello, {{current_user.nickname}}!</p></li>
+              -->
+              <li><p class="navbar-text">Hello, {{current_user.nickname}}!
+              <span class="glyphicon glyphicon-volume-up" style="cursor: pointer;" onclick="document.getElementById('audio').load();document.getElementById('audio').play();"></span>
+              <audio id="audio">
+                <source src="{{ url_for('members_voice') }}" type="audio/mpeg">
+              </audio></p>
+              </li>
+              
               <li><a href="{{ url_for('myphotos') }}">my photos</a>
               <li><a href="{{ url_for('logout') }}">log out</a>
               {% else %}
