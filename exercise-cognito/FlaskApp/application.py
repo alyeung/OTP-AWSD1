@@ -232,7 +232,7 @@ def members_voice():
     message = "hello %s welcome back" % flask_login.current_user.nickname
     
     # https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
-    response = polly.synthesize_speech(VoiceId='Russell', Text=message, OutputFormat='mp3', SampleRate='8000')
+    response = polly.synthesize_speech(VoiceId='Emma', Text=message, OutputFormat='mp3', SampleRate='8000')
 
     polly_bytes = response['AudioStream'].read()
     return send_file(
